@@ -8,7 +8,8 @@ class App extends Component {
   constructor () {
     super()
     this.state = {
-      movieinfo: null
+      movieinfo: null,
+      isFetching: false
     }
 
     this.handleSearch = this.handleSearch.bind(this)
@@ -32,6 +33,8 @@ class App extends Component {
     const ENTER = 13
 
     if (keyCode === ENTER) {
+      this.setState({ isFetching: true })
+
       ajax().get(this.getTheMovieDBApi(value))
         .then((movies) => {
           const result = movies.results
@@ -46,13 +49,14 @@ class App extends Component {
             }
           })
         })
+        .always(() => this.setState({ isFetching: false }))
     }
   }
 
   render () {
     return (
       <AppContent
-        movieinfo={this.state.movieinfo}
+        {...this.state}
         handleSearch={this.handleSearch}
       />
     )

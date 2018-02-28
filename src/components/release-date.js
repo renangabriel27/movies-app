@@ -1,6 +1,7 @@
 'use strict'
 
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const ReleaseDate = ({ releasedate }) => (
   <div className='release-date'>
@@ -8,5 +9,9 @@ const ReleaseDate = ({ releasedate }) => (
     <p>{releasedate}</p>
   </div>
 )
+
+ReleaseDate.propTypes = {
+  releasedate: PropTypes.string.isRequired
+}
 
 export default ReleaseDate

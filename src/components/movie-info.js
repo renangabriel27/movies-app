@@ -6,6 +6,7 @@ import Title from './title'
 import Overview from './overview'
 import VoteAverage from './vote-average'
 import ReleaseDate from './release-date'
+import PropTypes from 'prop-types'
 
 const MovieInfo = ({ info }) => (
   <div className='movie-info'>
@@ -16,5 +17,9 @@ const MovieInfo = ({ info }) => (
     <ReleaseDate releasedate={info.releasedate} />
   </div>
 )
+
+MovieInfo.propTypes = {
+  info: PropTypes.object.isRequired
+}
 
 export default MovieInfo
