@@ -8,18 +8,44 @@ class App extends Component {
   constructor () {
     super()
     this.state = {
-      movieinfo: {
-        title: 'Fight Club',
-        image: 'https://image.tmdb.org/t/p/w500/adw6Lq9FiC9zjYEpOqfq03ituwp.jpg',
-        overview:
-          `Mussum Ipsum, cacilds vidis litro abertis. Interessantiss quisso
-          pudia ce receita de bolis, mais bolis eu num gostis. Per aumento de
-          cachacis, eu reclamis. Leite de capivaris, leite de mula manquis sem
-          cabeça. Quem num gosta di mé, boa gentis num é.`,
-        runtime: 123,
-        voteaverage: 23,
-        releasedate: '1999-10-15'
-      }
+      movieinfo: null
+    }
+
+    this.handleSearch = this.handleSearch.bind(this)
+  }
+
+  getTheMovieDBApi (value) {
+    const apiUrl = 'https://api.themoviedb.org/3/search/movie?api_key='
+    const apiKey = '35120e8fbcd299809ae81ecd861da3af'
+    const query = `&query=${value}`
+
+    return `${apiUrl}${apiKey}${query}`
+  }
+
+  getImagePoster (link) {
+    return `https://image.tmdb.org/t/p/w500${link}`
+  }
+
+  handleSearch (e) {
+    const value = e.target.value
+    const keyCode = e.which || e.keyCode
+    const ENTER = 13
+
+    if (keyCode === ENTER) {
+      ajax().get(this.getTheMovieDBApi(value))
+        .then((movies) => {
+          const result = movies.results
+          console.log(result)
+          this.setState({
+            movieinfo: {
+              title: result[0].title,
+              overview: result[0].overview,
+              image: this.getImagePoster(result[0].poster_path),
+              voteaverage: result[0].vote_average,
+              releasedate: result[0].release_date
+            }
+          })
+        })
     }
   }
 
@@ -27,6 +53,7 @@ class App extends Component {
     return (
       <AppContent
         movieinfo={this.state.movieinfo}
+        handleSearch={this.handleSearch}
       />
     )
   }

@@ -4,10 +4,10 @@ import React from 'react'
 import Search from './search'
 import MovieInfo from './movie-info'
 
-const AppContent = ({ movieinfo }) => (
+const AppContent = ({ movieinfo, handleSearch }) => (
   <div className='app'>
-    <Search />
-    <MovieInfo info={movieinfo} />
+    <Search handleSearch={handleSearch} />
+    {!!movieinfo && <MovieInfo info={movieinfo} />}
   </div>
 )
 
