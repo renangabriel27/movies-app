@@ -16,10 +16,9 @@ class App extends Component {
           pudia ce receita de bolis, mais bolis eu num gostis. Per aumento de
           cachacis, eu reclamis. Leite de capivaris, leite de mula manquis sem
           cabeça. Quem num gosta di mé, boa gentis num é.`,
-        genres: ['Action', 'Adventure'],
-        runtime: '123 min',
-        director: 'David Fisher',
-        cast: ['Brad Pitt', 'Edward Norton']
+        runtime: 123,
+        voteaverage: 23,
+        releasedate: '1999-10-15'
       }
     }
   }
