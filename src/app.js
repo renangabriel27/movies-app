@@ -38,7 +38,7 @@ class App extends Component {
       ajax().get(this.getTheMovieDBApi(value))
         .then((movies) => {
           const result = movies.results
-          console.log(result)
+
           this.setState({
             movieinfo: {
               title: result[0].title,
